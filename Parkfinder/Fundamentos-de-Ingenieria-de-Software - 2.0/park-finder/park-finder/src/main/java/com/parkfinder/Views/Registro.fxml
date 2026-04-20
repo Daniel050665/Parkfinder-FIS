@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.parkfinder.controller.UsuarioController"
+      prefWidth="900" prefHeight="600"
+      style="-fx-background-color: white;">
+
+    <!-- Barra superior -->
+    <HBox prefHeight="50" spacing="10" alignment="CENTER_LEFT"
+          style="-fx-background-color: #1B4332; -fx-padding: 0 24 0 24;">
+        <Rectangle width="28" height="28" arcWidth="6" arcHeight="6" fill="#52B788"/>
+        <Label text="ParkFinder — Registro de usuario"
+               style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Contenido principal -->
+    <HBox VBox.vgrow="ALWAYS">
+
+        <!-- Panel lateral de pasos -->
+        <VBox prefWidth="220" spacing="0"
+              style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-width: 0 1 0 0; -fx-padding: 32 20 32 20;">
+            <Label text="PASOS"
+                   style="-fx-text-fill: #9ca3af; -fx-font-size: 11px; -fx-font-weight: bold; -fx-padding: 0 0 20 0;"/>
+
+            <!-- Paso 1 activo -->
+            <HBox spacing="12" alignment="TOP_LEFT" style="-fx-padding: 0 0 0 0;">
+                <StackPane>
+                    <Circle radius="14" fill="#1B4332"/>
+                    <Label text="1" style="-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                </StackPane>
+                <VBox>
+                    <Label text="Datos personales"
+                           style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #1B4332;"/>
+                    <Label text="Nombre y correo"
+                           style="-fx-font-size: 11px; -fx-text-fill: #6b7280;"/>
+                </VBox>
+            </HBox>
+
+            <Rectangle width="1" height="24" fill="#d1d5db" style="-fx-translate-x: 14;"/>
+
+            <!-- Paso 2 inactivo -->
+            <HBox spacing="12" alignment="TOP_LEFT">
+                <StackPane>
+                    <Circle radius="14" fill="#e5e7eb"/>
+                    <Label text="2" style="-fx-text-fill: #9ca3af; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                </StackPane>
+                <VBox>
+                    <Label text="Vehículo" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #9ca3af;"/>
+                    <Label text="Placa y tipo" style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;"/>
+                </VBox>
+            </HBox>
+
+            <Rectangle width="1" height="24" fill="#d1d5db" style="-fx-translate-x: 14;"/>
+
+            <!-- Paso 3 inactivo -->
+            <HBox spacing="12" alignment="TOP_LEFT">
+                <StackPane>
+                    <Circle radius="14" fill="#e5e7eb"/>
+                    <Label text="3" style="-fx-text-fill: #9ca3af; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                </StackPane>
+                <VBox>
+                    <Label text="Confirmación" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #9ca3af;"/>
+                    <Label text="Revisar y crear" style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;"/>
+                </VBox>
+            </HBox>
+        </VBox>
+
+        <!-- Formulario principal -->
+        <VBox HBox.hgrow="ALWAYS" spacing="0"
+              style="-fx-padding: 40 48 40 48;">
+
+            <Label text="Datos personales"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #111827; -fx-padding: 0 0 4 0;"/>
+            <Label text="Completa tu información para crear la cuenta"
+                   style="-fx-text-fill: #6b7280; -fx-font-size: 13px; -fx-padding: 0 0 32 0;"/>
+
+            <!-- Nombre y apellido -->
+            <GridPane hgap="20" vgap="6" style="-fx-padding: 0 0 20 0;">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
+                </columnConstraints>
+                <Label text="Nombre" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #374151;"/>
+                <Label text="Apellido" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #374151;"/>
+                <TextField fx:id="nombreField" promptText="Juan"
+                           GridPane.columnIndex="0" GridPane.rowIndex="1"
+                           style="-fx-background-color: #fafafa; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 14px; -fx-padding: 10 14 10 14; -fx-pref-height: 40;"/>
+                <TextField fx:id="apellidoField" promptText="Pérez"
+                           GridPane.columnIndex="1" GridPane.rowIndex="1"
+                           style="-fx-background-color: #fafafa; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 14px; -fx-padding: 10 14 10 14; -fx-pref-height: 40;"/>
+            </GridPane>
+
+            <!-- Correo -->
+            <Label text="Correo electrónico"
+                   style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #374151; -fx-padding: 0 0 6 0;"/>
+            <TextField fx:id="correoField" promptText="correo@ejemplo.com"
+                       style="-fx-background-color: #fafafa; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 14px; -fx-padding: 10 14 10 14; -fx-pref-height: 40;"/>
+            <Region prefHeight="20"/>
+
+            <!-- Contraseñas -->
+            <GridPane hgap="20" vgap="6" style="-fx-padding: 0 0 20 0;">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
+                </columnConstraints>
+                <Label text="Contraseña" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #374151;"/>
+                <Label text="Confirmar contraseña" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #374151;"/>
+                <PasswordField fx:id="contrasenaField" promptText="Mínimo 8 caracteres"
+                               GridPane.columnIndex="0" GridPane.rowIndex="1"
+                               style="-fx-background-color: #fafafa; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 14px; -fx-padding: 10 14 10 14; -fx-pref-height: 40;"/>
+                <PasswordField fx:id="confirmarContrasenaField" promptText="Repetir contraseña"
+                               GridPane.columnIndex="1" GridPane.rowIndex="1"
+                               style="-fx-background-color: #fafafa; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 14px; -fx-padding: 10 14 10 14; -fx-pref-height: 40;"/>
+            </GridPane>
+
+            <!-- Aviso -->
+            <Label text="La contraseña debe tener al menos 8 caracteres, una mayúscula y un número."
+                   wrapText="true"
+                   style="-fx-text-fill: #27500A; -fx-background-color: #EAF3DE; -fx-border-color: #97C459; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px; -fx-padding: 10 14 10 14;"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <!-- Botones -->
+            <HBox spacing="12" alignment="CENTER_RIGHT" style="-fx-padding: 32 0 0 0;">
+                <Button text="Cancelar"
+                        onAction="#handleCancelar"
+                        style="-fx-background-color: transparent; -fx-border-color: #d1d5db; -fx-border-width: 1; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 14px; -fx-padding: 10 24 10 24; -fx-text-fill: #374151; -fx-cursor: hand;"/>
+                <Button text="Siguiente →"
+                        fx:id="siguienteBtn"
+                        onAction="#handleSiguiente"
+                        style="-fx-background-color: #1B4332; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-border-radius: 6; -fx-padding: 10 32 10 32; -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+    </HBox>
+</VBox>

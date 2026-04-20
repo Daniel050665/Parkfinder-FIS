@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.parkfinder.controller.ReservaController"
+      prefWidth="1000" prefHeight="640"
+      style="-fx-background-color: white;">
+
+    <!-- Barra de navegación -->
+    <HBox prefHeight="48" alignment="CENTER_LEFT"
+          style="-fx-background-color: #1B4332; -fx-padding: 0 24 0 24; -fx-spacing: 0;">
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Rectangle width="26" height="26" arcWidth="6" arcHeight="6" fill="#52B788"/>
+            <Label text="ParkFinder"
+                   style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;"/>
+        </HBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <HBox spacing="24" alignment="CENTER">
+            <Label text="Inicio" style="-fx-text-fill: #9FE1CB; -fx-font-size: 13px; -fx-cursor: hand;" onMouseClicked="#irAInicio"/>
+            <Label text="Mis reservas" style="-fx-text-fill: #9FE1CB; -fx-font-size: 13px; -fx-cursor: hand;" onMouseClicked="#irAReservas"/>
+            <Label text="Historial" style="-fx-text-fill: #9FE1CB; -fx-font-size: 13px; -fx-cursor: hand;"/>
+            <Label text="Suscripción" style="-fx-text-fill: #9FE1CB; -fx-font-size: 13px; -fx-cursor: hand;"/>
+        </HBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <StackPane>
+                <Circle radius="15" fill="#52B788"/>
+                <Label fx:id="inicialesLabel" text="JP"
+                       style="-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+            </StackPane>
+            <Label fx:id="nombreUsuarioLabel" text="Juan Pérez"
+                   style="-fx-text-fill: white; -fx-font-size: 13px;"/>
+        </HBox>
+    </HBox>
+
+    <!-- Breadcrumb -->
+    <HBox prefHeight="42" alignment="CENTER_LEFT"
+          style="-fx-padding: 0 28 0 28; -fx-border-color: #e5e7eb; -fx-border-width: 0 0 1 0; -fx-spacing: 8;">
+        <Label text="← Volver a resultados"
+               fx:id="volverLink"
+               onMouseClicked="#handleVolver"
+               style="-fx-text-fill: #6b7280; -fx-font-size: 13px; -fx-cursor: hand;"/>
+        <Label text="/" style="-fx-text-fill: #d1d5db; -fx-font-size: 13px;"/>
+        <Label fx:id="nombreParqueaderoNav" text="Parqueadero Central"
+               style="-fx-text-fill: #374151; -fx-font-size: 13px;"/>
+    </HBox>
+
+    <!-- Contenido principal -->
+    <HBox VBox.vgrow="ALWAYS">
+
+        <!-- Panel izquierdo: detalles y cupos -->
+        <VBox HBox.hgrow="ALWAYS" style="-fx-padding: 28 36 28 36; -fx-spacing: 0;">
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                        style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                <VBox spacing="0">
+                    <!-- Encabezado -->
+                    <HBox alignment="CENTER_LEFT" style="-fx-padding: 0 0 24 0;">
+                        <VBox HBox.hgrow="ALWAYS">
+                            <Label fx:id="nombreParqueaderoLabel" text="Parqueadero Central"
+                                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #111827;"/>
+                            <Label fx:id="direccionLabel" text="Cra 13 # 52-40, Chapinero, Bogotá"
+                                   style="-fx-text-fill: #6b7280; -fx-font-size: 14px;"/>
+                        </VBox>
+                        <Label fx:id="cuposDisponiblesLabel" text="12 cupos disponibles"
+                               style="-fx-text-fill: #27500A; -fx-background-color: #EAF3DE; -fx-background-radius: 20; -fx-padding: 6 14 6 14; -fx-font-size: 13px; -fx-font-weight: bold;"/>
+                    </HBox>
+
+                    <!-- Métricas -->
+                    <GridPane hgap="12" vgap="0" style="-fx-padding: 0 0 28 0;">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                            <ColumnConstraints percentWidth="25"/>
+                        </columnConstraints>
+                        <VBox GridPane.columnIndex="0"
+                              style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 14; -fx-alignment: center;">
+                            <Label fx:id="precioLabel" text="$3.500"
+                                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1B4332; -fx-alignment: center;" maxWidth="Infinity"/>
+                            <Label text="por hora"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #6b7280; -fx-alignment: center;" maxWidth="Infinity"/>
+                        </VBox>
+                        <VBox GridPane.columnIndex="1"
+                              style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 14; -fx-alignment: center;">
+                            <Label fx:id="horarioLabel" text="6am–10pm"
+                                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #111827; -fx-alignment: center;" maxWidth="Infinity"/>
+                            <Label text="horario"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #6b7280; -fx-alignment: center;" maxWidth="Infinity"/>
+                        </VBox>
+                        <VBox GridPane.columnIndex="2"
+                              style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 14; -fx-alignment: center;">
+                            <Label fx:id="vehiculosLabel" text="Auto / Moto"
+                                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #111827; -fx-alignment: center;" maxWidth="Infinity"/>
+                            <Label text="vehículos"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #6b7280; -fx-alignment: center;" maxWidth="Infinity"/>
+                        </VBox>
+                        <VBox GridPane.columnIndex="3"
+                              style="-fx-background-color: #f9fafb; -fx-border-color: #e5e7eb; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 14; -fx-alignment: center;">
+                            <Label fx:id="tipoLabel" text="Cubierto"
+                                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #111827; -fx-alignment: center;" maxWidth="Infinity"/>
+                            <Label text="tipo"
+                                   style="-fx-font-size: 11px; -fx-text-fill: #6b7280; -fx-alignment: center;" maxWidth="Infinity"/>
+                        </VBox>
+                    </GridPane>
+
+                    <!-- Cupos disponibles -->
+                    <Label text="Cupos disponibles"
+                           style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #111827; -fx-padding: 0 0 16 0;"/>
+                    <FlowPane fx:id="cuposPane" hgap="8" vgap="8" style="-fx-padding: 0 0 0 0;"/>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+
+        <!-- Panel derecho: confirmar reserva -->
+        <VBox prefWidth="300"
+              style="-fx-background-color: #fafafa; -fx-border-color: #e5e7eb; -fx-border-width: 0 0 0 1; -fx-padding: 28 24 28 24; -fx-spacing: 16;">
+
+            <Label text="Confirmar reserva"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #111827;"/>
+
+            <!-- Cupo seleccionado -->
+            <VBox style="-fx-background-color: #EAF3DE; -fx-border-color: #C0DD97; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 14 10 14;">
+                <Label text="Cupo seleccionado" style="-fx-font-size: 12px; -fx-text-fill: #3B6D11;"/>
+                <Label fx:id="cupoSeleccionadoLabel" text="Selecciona un cupo"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1B4332;"/>
+            </VBox>
+
+            <!-- Vehículo -->
+            <VBox spacing="6">
+                <Label text="Vehículo"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #374151;"/>
+                <ComboBox fx:id="vehiculoCombo" maxWidth="Infinity"
+                          style="-fx-font-size: 13px;"/>
+            </VBox>
+
+            <!-- Fecha inicio -->
+            <VBox spacing="6">
+                <Label text="Fecha y hora inicio"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #374151;"/>
+                <DatePicker fx:id="fechaInicio" maxWidth="Infinity"/>
+                <ComboBox fx:id="horaInicio" promptText="Hora de inicio"
+                          maxWidth="Infinity" style="-fx-font-size: 13px;"/>
+            </VBox>
+
+            <!-- Duración -->
+            <VBox spacing="6">
+                <Label text="Duración estimada (horas)"
+                       style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #374151;"/>
+                <Spinner fx:id="duracionSpinner" min="1" max="12" initialValue="2"
+                         maxWidth="Infinity" editable="true"/>
+            </VBox>
+
+            <!-- Resumen costos -->
+            <VBox style="-fx-border-color: #e5e7eb; -fx-border-width: 1 0 0 0; -fx-padding: 14 0 0 0; -fx-spacing: 6;">
+                <HBox>
+                    <Label text="Costo estimado" style="-fx-font-size: 13px; -fx-text-fill: #6b7280;" HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="costoEstimadoLabel" text="$7.000"
+                           style="-fx-font-size: 13px; -fx-text-fill: #374151;"/>
+                </HBox>
+                <HBox>
+                    <Label text="Descuento fidelización" style="-fx-font-size: 13px; -fx-text-fill: #6b7280;" HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="descuentoLabel" text="- $0"
+                           style="-fx-font-size: 13px; -fx-text-fill: #1B4332;"/>
+                </HBox>
+                <HBox style="-fx-border-color: #e5e7eb; -fx-border-width: 1 0 0 0; -fx-padding: 10 0 0 0;">
+                    <Label text="Total" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #111827;" HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="totalLabel" text="$7.000"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1B4332;"/>
+                </HBox>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Confirmar reserva"
+                    fx:id="confirmarBtn"
+                    onAction="#handleConfirmarReserva"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: #1B4332; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-border-radius: 6; -fx-padding: 12 0 12 0; -fx-cursor: hand;"/>
+            <Button text="Cancelar"
+                    onAction="#handleCancelar"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-border-color: #d1d5db; -fx-border-width: 1; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #374151; -fx-font-size: 13px; -fx-padding: 10 0 10 0; -fx-cursor: hand;"/>
+        </VBox>
+    </HBox>
+</VBox>

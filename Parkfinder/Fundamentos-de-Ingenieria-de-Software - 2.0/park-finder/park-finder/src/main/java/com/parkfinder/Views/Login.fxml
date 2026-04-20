@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.parkfinder.controller.LoginController"
+      prefWidth="900" prefHeight="580"
+      style="-fx-background-color: #1B4332;">
+
+    <!-- Panel izquierdo verde -->
+    <VBox prefWidth="480" spacing="0"
+          style="-fx-background-color: #1B4332; -fx-padding: 60 56 60 56;">
+
+        <!-- Logo -->
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 0 0 48 0;">
+            <Rectangle width="36" height="36" arcWidth="8" arcHeight="8"
+                       fill="#52B788"/>
+            <Label text="ParkFinder"
+                   style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;"/>
+        </HBox>
+
+        <Label text="SISTEMA DE PARQUEADEROS"
+               style="-fx-text-fill: #9FE1CB; -fx-font-size: 12px; -fx-padding: 0 0 12 0;"/>
+
+        <Label text="Encuentra y reserva tu espacio en segundos"
+               wrapText="true"
+               style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold; -fx-padding: 0 0 16 0;"/>
+
+        <Label text="Consulta disponibilidad, precios y horarios antes de salir. Gestiona tus reservas y pagos desde un solo lugar."
+               wrapText="true"
+               style="-fx-text-fill: #9FE1CB; -fx-font-size: 13px; -fx-padding: 0 0 48 0;"/>
+
+        <!-- Beneficios -->
+        <VBox spacing="14">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Circle radius="10" fill="#52B788"/>
+                <Label text="Reservas en tiempo real" style="-fx-text-fill: #9FE1CB; -fx-font-size: 13px;"/>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Circle radius="10" fill="#52B788"/>
+                <Label text="Pagos simulados seguros" style="-fx-text-fill: #9FE1CB; -fx-font-size: 13px;"/>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Circle radius="10" fill="#52B788"/>
+                <Label text="Sistema de fidelización" style="-fx-text-fill: #9FE1CB; -fx-font-size: 13px;"/>
+            </HBox>
+        </VBox>
+    </VBox>
+
+    <!-- Panel derecho blanco -->
+    <VBox prefWidth="420" spacing="0"
+          style="-fx-background-color: white; -fx-padding: 56 48 56 48;">
+
+        <Label text="Iniciar sesión"
+               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #111827; -fx-padding: 0 0 4 0;"/>
+        <Label text="Ingresa tus credenciales para continuar"
+               style="-fx-text-fill: #6b7280; -fx-font-size: 13px; -fx-padding: 0 0 36 0;"/>
+
+        <!-- Campo correo -->
+        <Label text="Correo electrónico"
+               style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #374151; -fx-padding: 0 0 6 0;"/>
+        <TextField fx:id="correoField"
+                   promptText="usuario@correo.com"
+                   style="-fx-background-color: #fafafa; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 14px; -fx-padding: 10 14 10 14; -fx-pref-height: 40;"/>
+        <Region prefHeight="20"/>
+
+        <!-- Campo contraseña -->
+        <Label text="Contraseña"
+               style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #374151; -fx-padding: 0 0 6 0;"/>
+        <PasswordField fx:id="contrasenaField"
+                       promptText="••••••••"
+                       style="-fx-background-color: #fafafa; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 14px; -fx-padding: 10 14 10 14; -fx-pref-height: 40;"/>
+
+        <!-- Error label (oculto por defecto) -->
+        <Label fx:id="errorLabel"
+               text="Credenciales incorrectas. Verifica tu correo y contraseña."
+               wrapText="true"
+               visible="false"
+               style="-fx-text-fill: #A32D2D; -fx-background-color: #FCEBEB; -fx-border-color: #F09595; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 12px; -fx-padding: 8 10 8 10;"/>
+
+        <!-- Olvidé contraseña -->
+        <HBox alignment="CENTER_RIGHT" style="-fx-padding: 8 0 28 0;">
+            <Hyperlink text="¿Olvidaste tu contraseña?"
+                       fx:id="olvidoLink"
+                       onAction="#handleOlvidoContrasena"
+                       style="-fx-text-fill: #1B4332; -fx-font-size: 12px; -fx-border-color: transparent;"/>
+        </HBox>
+
+        <!-- Botón iniciar sesión -->
+        <Button text="Iniciar sesión"
+                fx:id="loginBtn"
+                onAction="#handleLogin"
+                maxWidth="Infinity"
+                style="-fx-background-color: #1B4332; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-border-radius: 6; -fx-padding: 12 0 12 0; -fx-cursor: hand;"/>
+        <Region prefHeight="12"/>
+
+        <!-- Botón registro -->
+        <Button text="Crear cuenta nueva"
+                fx:id="registroBtn"
+                onAction="#handleIrARegistro"
+                maxWidth="Infinity"
+                style="-fx-background-color: transparent; -fx-border-color: #d1d5db; -fx-border-width: 1; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #374151; -fx-font-size: 14px; -fx-padding: 10 0 10 0; -fx-cursor: hand;"/>
+
+        <Region VBox.vgrow="ALWAYS"/>
+
+        <!-- Footer -->
+        <Separator style="-fx-padding: 24 0 0 0;"/>
+        <Label text="ParkFinder v1.0 · Proyecto académico"
+               maxWidth="Infinity"
+               style="-fx-text-fill: #9ca3af; -fx-font-size: 11px; -fx-padding: 16 0 0 0; -fx-alignment: center;"/>
+    </VBox>
+</HBox>

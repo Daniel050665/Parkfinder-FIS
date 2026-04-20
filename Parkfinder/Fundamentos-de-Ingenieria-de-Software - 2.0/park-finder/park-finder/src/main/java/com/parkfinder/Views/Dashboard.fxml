@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.parkfinder.controller.DashboardController"
+      prefWidth="1000" prefHeight="640"
+      style="-fx-background-color: white;">
+
+    <!-- Barra de navegación -->
+    <HBox prefHeight="48" alignment="CENTER_LEFT"
+          style="-fx-background-color: #1B4332; -fx-padding: 0 24 0 24; -fx-spacing: 0;">
+
+        <!-- Logo -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Rectangle width="26" height="26" arcWidth="6" arcHeight="6" fill="#52B788"/>
+            <Label text="ParkFinder"
+                   style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;"/>
+        </HBox>
+
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <!-- Menú central -->
+        <HBox spacing="24" alignment="CENTER">
+            <Label text="Inicio"
+                   style="-fx-text-fill: white; -fx-font-size: 13px; -fx-border-color: #52B788; -fx-border-width: 0 0 2 0; -fx-padding: 0 0 2 0;"/>
+            <Label text="Mis reservas"
+                   fx:id="navReservas"
+                   style="-fx-text-fill: #9FE1CB; -fx-font-size: 13px; -fx-cursor: hand;"
+                   onMouseClicked="#irAReservas"/>
+            <Label text="Historial"
+                   fx:id="navHistorial"
+                   style="-fx-text-fill: #9FE1CB; -fx-font-size: 13px; -fx-cursor: hand;"
+                   onMouseClicked="#irAHistorial"/>
+            <Label text="Suscripción"
+                   fx:id="navSuscripcion"
+                   style="-fx-text-fill: #9FE1CB; -fx-font-size: 13px; -fx-cursor: hand;"
+                   onMouseClicked="#irASuscripcion"/>
+        </HBox>
+
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <!-- Usuario -->
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <StackPane>
+                <Circle radius="15" fill="#52B788"/>
+                <Label fx:id="inicialesLabel" text="JP"
+                       style="-fx-text-fill: white; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+            </StackPane>
+            <Label fx:id="nombreUsuarioLabel" text="Juan Pérez"
+                   style="-fx-text-fill: white; -fx-font-size: 13px;"/>
+        </HBox>
+    </HBox>
+
+    <!-- Contenido principal -->
+    <HBox VBox.vgrow="ALWAYS">
+
+        <!-- Panel izquierdo: búsqueda y lista -->
+        <VBox prefWidth="340"
+              style="-fx-border-color: #e5e7eb; -fx-border-width: 0 1 0 0;">
+
+            <!-- Buscador -->
+            <VBox style="-fx-padding: 20 20 16 20; -fx-spacing: 10;">
+                <Label text="Buscar parqueadero"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #111827;"/>
+                <TextField fx:id="busquedaField"
+                           promptText="Zona, barrio o dirección..."
+                           style="-fx-background-color: #fafafa; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 14px; -fx-padding: 10 14 10 14;"/>
+
+                <GridPane hgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50"/>
+                        <ColumnConstraints percentWidth="50"/>
+                    </columnConstraints>
+                    <ComboBox fx:id="filtroTipo" promptText="Tipo: Todos"
+                              GridPane.columnIndex="0" maxWidth="Infinity"
+                              style="-fx-font-size: 12px;"/>
+                    <ComboBox fx:id="filtroPrecio" promptText="Precio: Cualquiera"
+                              GridPane.columnIndex="1" maxWidth="Infinity"
+                              style="-fx-font-size: 12px;"/>
+                </GridPane>
+
+                <Button text="Buscar"
+                        fx:id="buscarBtn"
+                        onAction="#handleBuscar"
+                        maxWidth="Infinity"
+                        style="-fx-background-color: #1B4332; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-border-radius: 6; -fx-padding: 10 0 10 0; -fx-cursor: hand;"/>
+            </VBox>
+
+            <Label fx:id="resultadosLabel" text="8 parqueaderos encontrados"
+                   style="-fx-text-fill: #6b7280; -fx-font-size: 12px; -fx-padding: 0 20 8 20;"/>
+
+            <!-- Lista de parqueaderos -->
+            <ListView fx:id="listaParqueaderos"
+                      VBox.vgrow="ALWAYS"
+                      onMouseClicked="#handleSeleccionarParqueadero"
+                      style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0 12 12 12;"/>
+        </VBox>
+
+        <!-- Panel derecho: mapa placeholder -->
+        <StackPane HBox.hgrow="ALWAYS"
+                   style="-fx-background-color: #e8eae8;">
+            <VBox alignment="CENTER" spacing="12">
+                <Label text="Vista de Mapa"
+                       style="-fx-text-fill: #9ca3af; -fx-font-size: 18px;"/>
+                <Label text="Selecciona un parqueadero para ver su ubicación"
+                       style="-fx-text-fill: #9ca3af; -fx-font-size: 13px;"/>
+            </VBox>
+
+            <!-- Leyenda mapa -->
+            <VBox alignment="BOTTOM_RIGHT" style="-fx-padding: 12;">
+                <VBox style="-fx-background-color: white; -fx-border-color: #d1d5db; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 14 10 14; -fx-spacing: 6;">
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Circle radius="6" fill="#1B4332"/>
+                        <Label text="Seleccionado" style="-fx-font-size: 11px; -fx-text-fill: #374151;"/>
+                    </HBox>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Circle radius="6" fill="#52B788"/>
+                        <Label text="Disponible" style="-fx-font-size: 11px; -fx-text-fill: #374151;"/>
+                    </HBox>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Circle radius="6" fill="#888780"/>
+                        <Label text="Sin cupos" style="-fx-font-size: 11px; -fx-text-fill: #374151;"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </StackPane>
+    </HBox>
+</VBox>

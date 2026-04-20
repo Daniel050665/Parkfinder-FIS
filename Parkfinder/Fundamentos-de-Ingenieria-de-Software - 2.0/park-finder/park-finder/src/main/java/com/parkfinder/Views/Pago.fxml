@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.parkfinder.controller.PagoController"
+      prefWidth="900" prefHeight="580"
+      style="-fx-background-color: white;">
+
+    <!-- Barra superior -->
+    <HBox prefHeight="48" alignment="CENTER_LEFT"
+          style="-fx-background-color: #1B4332; -fx-padding: 0 24 0 24; -fx-spacing: 10;">
+        <Rectangle width="26" height="26" arcWidth="6" arcHeight="6" fill="#52B788"/>
+        <Label text="ParkFinder — Pago simulado"
+               style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Contenido -->
+    <HBox VBox.vgrow="ALWAYS">
+
+        <!-- Panel izquierdo: detalles del servicio -->
+        <VBox HBox.hgrow="ALWAYS" style="-fx-padding: 36 40 36 40; -fx-spacing: 0;">
+            <Label text="Resumen del servicio"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #111827;"/>
+            <Label text="Revisa los detalles antes de confirmar el pago"
+                   style="-fx-text-fill: #6b7280; -fx-font-size: 13px; -fx-padding: 4 0 28 0;"/>
+
+            <!-- Detalle de uso -->
+            <VBox style="-fx-border-color: #e5e7eb; -fx-border-radius: 8; -fx-background-radius: 8; -fx-border-width: 1; -fx-padding: 20; -fx-spacing: 14; -fx-padding: 0 0 20 0;">
+                <Label text="Detalle de uso"
+                       style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #374151;"/>
+                <GridPane hgap="16" vgap="14">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50"/>
+                        <ColumnConstraints percentWidth="50"/>
+                    </columnConstraints>
+                    <VBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label text="Parqueadero" style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;"/>
+                        <Label fx:id="nombreParqueaderoPago" text="Parqueadero Central"
+                               style="-fx-font-size: 14px; -fx-text-fill: #374151;"/>
+                    </VBox>
+                    <VBox GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Label text="Cupo" style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;"/>
+                        <Label fx:id="cupoPago" text="A-02"
+                               style="-fx-font-size: 14px; -fx-text-fill: #374151;"/>
+                    </VBox>
+                    <VBox GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <Label text="Entrada" style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;"/>
+                        <Label fx:id="entradaPago" text="26/03/2026 · 9:00 AM"
+                               style="-fx-font-size: 14px; -fx-text-fill: #374151;"/>
+                    </VBox>
+                    <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label text="Salida" style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;"/>
+                        <Label fx:id="salidaPago" text="26/03/2026 · 11:00 AM"
+                               style="-fx-font-size: 14px; -fx-text-fill: #374151;"/>
+                    </VBox>
+                    <VBox GridPane.columnIndex="0" GridPane.rowIndex="2">
+                        <Label text="Duración" style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;"/>
+                        <Label fx:id="duracionPago" text="2 horas"
+                               style="-fx-font-size: 14px; -fx-text-fill: #374151;"/>
+                    </VBox>
+                    <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label text="Tarifa" style="-fx-font-size: 11px; -fx-text-fill: #9ca3af;"/>
+                        <Label fx:id="tarifaPago" text="3500/hora"
+                               style="-fx-font-size: 14px; -fx-text-fill: #374151;"/>
+                    </VBox>
+                </GridPane>
+            </VBox>
+
+            <!-- Forma de pago -->
+            <VBox style="-fx-border-color: #e5e7eb; -fx-border-radius: 8; -fx-background-radius: 8; -fx-border-width: 1; -fx-padding: 20; -fx-spacing: 14;">
+                <Label text="Forma de pago"
+                       style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #374151;"/>
+                <HBox spacing="10">
+                    <ToggleButton fx:id="btnEfectivo" text="Efectivo simulado"
+                                  selected="true"
+                                  style="-fx-background-color: #EAF3DE; -fx-border-color: #1B4332; -fx-border-width: 2; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #1B4332; -fx-font-weight: bold; -fx-font-size: 13px; -fx-padding: 10 20 10 20; -fx-cursor: hand;"/>
+                    <ToggleButton fx:id="btnTarjeta" text="Tarjeta simulada"
+                                  style="-fx-background-color: transparent; -fx-border-color: #d1d5db; -fx-border-width: 1; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #6b7280; -fx-font-size: 13px; -fx-padding: 10 20 10 20; -fx-cursor: hand;"/>
+                    <ToggleButton fx:id="btnPSE" text="PSE simulado"
+                                  style="-fx-background-color: transparent; -fx-border-color: #d1d5db; -fx-border-width: 1; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #6b7280; -fx-font-size: 13px; -fx-padding: 10 20 10 20; -fx-cursor: hand;"/>
+                </HBox>
+                <Label text="El pago es simulado. No se realizará ningún cargo real."
+                       style="-fx-text-fill: #3B6D11; -fx-background-color: #EAF3DE; -fx-background-radius: 6; -fx-padding: 12 16 12 16; -fx-font-size: 13px;"/>
+            </VBox>
+        </VBox>
+
+        <!-- Panel derecho: total a pagar -->
+        <VBox prefWidth="300"
+              style="-fx-background-color: #fafafa; -fx-border-color: #e5e7eb; -fx-border-width: 0 0 0 1; -fx-padding: 36 24 36 24; -fx-spacing: 0;">
+
+            <Label text="Total a pagar"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #111827; -fx-padding: 0 0 20 0;"/>
+
+            <HBox style="-fx-border-color: #e5e7eb; -fx-border-width: 0 0 1 0; -fx-padding: 0 0 10 0;">
+                <Label fx:id="desglosePago" text="2 horas × $3.500"
+                       style="-fx-font-size: 13px; -fx-text-fill: #6b7280;" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="subtotalLabel" text="7.000"
+                       style="-fx-font-size: 13px; -fx-text-fill: #374151;"/>
+            </HBox>
+
+            <HBox style="-fx-padding: 10 0 10 0;">
+                <Label text="Descuento suscripción"
+                       style="-fx-font-size: 13px; -fx-text-fill: #6b7280;" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="descuentoPagoLabel" text="- $0"
+                       style="-fx-font-size: 13px; -fx-text-fill: #1B4332;"/>
+            </HBox>
+
+            <HBox style="-fx-border-color: #e5e7eb; -fx-border-width: 1 0 0 0; -fx-padding: 12 0 24 0;">
+                <Label text="Total"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #111827;" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="totalPagoLabel" text="$7.000"
+                       style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1B4332;"/>
+            </HBox>
+
+            <!-- Aviso fidelización -->
+            <VBox style="-fx-background-color: #FAEEDA; -fx-border-color: #FAC775; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 14; -fx-spacing: 4; -fx-padding: 0 0 24 0;">
+                <Label text="Fidelización"
+                       style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #633806;"/>
+                <Label fx:id="avisoFidelizacion"
+                       text="Este pago contará como uso 3 de 3. Próxima reserva gratis."
+                       wrapText="true"
+                       style="-fx-font-size: 12px; -fx-text-fill: #412402;"/>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Confirmar pago"
+                    fx:id="confirmarPagoBtn"
+                    onAction="#handleConfirmarPago"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: #1B4332; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-border-radius: 6; -fx-padding: 14 0 14 0; -fx-cursor: hand;"/>
+            <Region prefHeight="10"/>
+            <Button text="Cancelar"
+                    onAction="#handleCancelarPago"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-border-color: #d1d5db; -fx-border-width: 1; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #374151; -fx-font-size: 13px; -fx-padding: 10 0 10 0; -fx-cursor: hand;"/>
+        </VBox>
+    </HBox>
+</VBox>
