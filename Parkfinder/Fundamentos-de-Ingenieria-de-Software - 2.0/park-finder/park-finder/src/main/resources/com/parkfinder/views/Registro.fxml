@@ -5,7 +5,7 @@
 <?import javafx.scene.shape.*?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.parkfinder.controller.UsuarioController"
+      fx:controller="com.parkfinder.controller.RegistroController"
       prefWidth="900" prefHeight="600"
       style="-fx-background-color: white;">
 

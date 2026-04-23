@@ -11,7 +11,7 @@ import com.parkfinder.repositories.UsuarioRepository;
 import java.util.List;
 
 @SpringBootApplication
-public class ParkFinderApplication {
+public class   ParkFinderApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ParkFinderApplication.class, args);

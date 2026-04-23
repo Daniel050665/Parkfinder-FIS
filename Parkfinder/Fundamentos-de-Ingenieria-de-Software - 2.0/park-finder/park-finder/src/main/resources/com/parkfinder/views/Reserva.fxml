@@ -149,8 +149,7 @@
             <VBox spacing="6">
                 <Label text="Duración estimada (horas)"
                        style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #374151;"/>
-                <Spinner fx:id="duracionSpinner" min="1" max="12" initialValue="2"
-                         maxWidth="Infinity" editable="true"/>
+                <Spinner fx:id="duracionSpinner" maxWidth="Infinity" editable="true"/>
             </VBox>
 
             <!-- Resumen costos -->
