@@ -1,4 +1,4 @@
-package com.parkfinder.controller;
+package com.parkfinder.ControllesJFX;
 
 import com.parkfinder.entities.*;
 import com.parkfinder.repositories.*;

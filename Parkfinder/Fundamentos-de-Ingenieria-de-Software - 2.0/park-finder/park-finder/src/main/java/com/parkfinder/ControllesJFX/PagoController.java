@@ -1,4 +1,4 @@
-package com.parkfinder.controller;
+package com.parkfinder.ControllesJFX;
 
 import com.parkfinder.entities.Reserva;
 import com.parkfinder.services.PagoService;

@@ -1,4 +1,4 @@
-package com.parkfinder.controller;
+package com.parkfinder.ControllesJFX;
 
 import com.parkfinder.services.UsuarioService;
 import com.parkfinder.util.SesionActual;
