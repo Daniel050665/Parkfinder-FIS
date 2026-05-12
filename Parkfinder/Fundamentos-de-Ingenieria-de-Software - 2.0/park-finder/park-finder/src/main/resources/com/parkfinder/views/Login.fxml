@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 
 <HBox xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.parkfinder.controller.LoginController"
+      fx:controller="com.parkfinder.ControllesJFX.LoginController"
       prefWidth="900" prefHeight="580"
       style="-fx-background-color: #1B4332;">
 

@@ -17,8 +17,8 @@ public class ViewLoader {
                 throw new IllegalStateException(
                         "FXML no encontrado: " + fxmlName +
                                 "\nRutas intentadas:" +
-                                "\n  Views/" + fxmlName +
-                                "\n  com/parkfinder/Views/" + fxmlName
+                                "\n  views/" + fxmlName +
+                                "\n  com/parkfinder/views/" + fxmlName
                 );
             }
 
@@ -35,9 +35,9 @@ public class ViewLoader {
 
         // Intenta todas las rutas posibles en orden
         String[] rutas = {
-                "Views/" + fxmlName,
-                "com/parkfinder/Views/" + fxmlName,
-                "static/Views/" + fxmlName,
+                "views/" + fxmlName,
+                "com/parkfinder/views/" + fxmlName,
+                "static/views/" + fxmlName,
         };
 
         for (String ruta : rutas) {
