@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.2</version>
+		<version>3.5.0</version>
 		<relativePath/>
 	</parent>
 
@@ -21,7 +21,6 @@
 	</properties>
 
 	<dependencies>
-		<!-- JavaFX -->
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
@@ -32,34 +31,29 @@
 			<artifactId>javafx-fxml</artifactId>
 			<version>${javafx.version}</version>
 		</dependency>
-
-		<!-- Spring Boot + JPA -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-web</artifactId>
+			<version>${javafx.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-
-		<!-- Web (mantiene REST controllers compilando, pero no levanta Tomcat — ver application.properties) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
-		<!-- H2 Database -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
-		<!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-
-		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -86,10 +80,17 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
+
+			<!-- UN SOLO plugin de Spring Boot con el module-path correcto -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<mainClass>com.parkfinder.Launcher</mainClass>
+					<jvmArguments>
+						--module-path ${settings.localRepository}/org/openjfx/javafx-controls/21/javafx-controls-21-win.jar${path.separator}${settings.localRepository}/org/openjfx/javafx-fxml/21/javafx-fxml-21-win.jar${path.separator}${settings.localRepository}/org/openjfx/javafx-graphics/21/javafx-graphics-21-win.jar${path.separator}${settings.localRepository}/org/openjfx/javafx-base/21/javafx-base-21-win.jar${path.separator}${settings.localRepository}/org/openjfx/javafx-web/21/javafx-web-21-win.jar${path.separator}${settings.localRepository}/org/openjfx/javafx-media/21/javafx-media-21-win.jar
+						--add-modules javafx.controls,javafx.fxml,javafx.web
+					</jvmArguments>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -98,12 +99,13 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.openjfx</groupId>
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>0.0.8</version>
 				<configuration>
-					<mainClass>com.parkfinder.MainApp</mainClass>
+					<mainClass>com.parkfinder.Launcher</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>
