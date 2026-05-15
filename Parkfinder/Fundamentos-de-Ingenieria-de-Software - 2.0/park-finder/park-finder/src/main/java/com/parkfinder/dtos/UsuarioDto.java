@@ -4,6 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
+/**
+ * Objeto de transferencia de datos para el registro de usuarios.
+ * Transporta nombre, correo, contrasena, placa y tipo de vehiculo.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Getter
 @Setter
 @NoArgsConstructor

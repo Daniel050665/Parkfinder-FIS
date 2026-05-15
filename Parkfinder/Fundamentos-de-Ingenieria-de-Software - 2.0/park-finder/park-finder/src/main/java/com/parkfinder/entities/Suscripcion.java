@@ -6,6 +6,13 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+/**
+ * Entidad JPA que representa una suscripcion mensual de un usuario.
+ * Permite acceso a beneficios adicionales durante su periodo de vigencia.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Entity
 @Table(name = "SUSCRIPCIONES")
 @Getter
