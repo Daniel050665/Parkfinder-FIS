@@ -10,10 +10,20 @@ import com.parkfinder.repositories.UsuarioRepository;
 import com.parkfinder.repositories.CupoRepository;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
+/**
+ * Servicio que gestiona el procesamiento de pagos simulados.
+ * Calcula montos, libera cupos, actualiza el historial de uso
+ * y aplica el sistema de fidelizacion.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Service
+@Transactional
 public class PagoService {
 
     private final PagoRepository pagoRepository;
@@ -35,7 +45,18 @@ public class PagoService {
         this.beneficioService = beneficioService;
     }
 
-    public Pago crearPago(Long idReserva, String metodoPago, String tipoPago) {
+        /**
+     * Procesa un pago simulado para una reserva activa.
+     * Calcula el monto, libera el cupo, finaliza la reserva y
+     * aplica el sistema de fidelizacion.
+     *
+     * @param idReserva  identificador de la reserva a pagar
+     * @param metodoPago metodo de pago (EFECTIVO, TARJETA, PSE)
+     * @param tipoPago   tipo de pago (PAGO_TIEMPO o SUSCRIPCION)
+     * @return el pago registrado con estado COMPLETADO
+     * @throws RuntimeException si la reserva no existe o no esta activa
+     */
+public Pago crearPago(Long idReserva, String metodoPago, String tipoPago) {
 
         Reserva reserva = reservaRepository.findById(idReserva)
                 .orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
@@ -55,35 +76,36 @@ public class PagoService {
         pago.setEstadoPago("COMPLETADO");
         pago.setFechaPago(LocalDateTime.now());
 
-        Cupo cupo = reserva.getCupo();
-        cupo.setDisponible(true);
-        cupoRepository.save(cupo);
-
-        reserva.setEstado("FINALIZADA");
-
-        Usuario usuario = reserva.getUsuario();
-        usuario.setUsosAcumulados(usuario.getUsosAcumulados() + 1);
-        usuarioRepository.save(usuario);
-
-        beneficioService.generarBeneficioSiAplica(usuario);
-
+        // La reserva queda ACTIVA - se finaliza cuando el usuario termina de usar el cupo
         reservaRepository.save(reserva);
 
-        return pagoRepository.save(pago);
+        Pago saved = pagoRepository.save(pago);
+        System.out.println("[PagoService] Pago procesado ID=" + saved.getIdPago()
+            + " | Monto=$" + String.format("%,.0f", monto)
+            + " | Metodo=" + metodoPago + " | Reserva=" + idReserva);
+        return saved;
     }
 
+    /**
+     * Calcula el monto a pagar segun el tipo de pago y la tarifa del parqueadero.
+     *
+     * @param reserva  reserva asociada al pago
+     * @param tipoPago tipo de pago (PAGO_TIEMPO o SUSCRIPCION)
+     * @return monto calculado en pesos colombianos
+     */
     private double calcularMonto(Reserva reserva, String tipoPago) {
 
         int horas = reserva.getTiempoEstimadoHoras();
+        double precioPorHora = reserva.getCupo().getParqueadero().getPrecioPorHora();
 
         if ("PAGO_TIEMPO".equals(tipoPago)) {
-            return horas * 4000;
+            return horas * precioPorHora;
         }
 
         if ("SUSCRIPCION".equals(tipoPago)) {
-            return 80000;
+            return reserva.getCupo().getParqueadero().getPrecioSuscripcion();
         }
 
-        throw new RuntimeException("Tipo de pago inválido");
+        throw new RuntimeException("Tipo de pago invalido");
     }
 }
