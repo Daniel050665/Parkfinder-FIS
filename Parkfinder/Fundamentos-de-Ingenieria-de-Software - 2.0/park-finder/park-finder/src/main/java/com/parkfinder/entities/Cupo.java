@@ -6,6 +6,14 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
+/**
+ * Entidad JPA que representa un espacio individual de estacionamiento
+ * dentro de un parqueadero. Controla la disponibilidad mediante un
+ * atributo booleano.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Entity
 @Table(name = "CUPOS")
 @Getter

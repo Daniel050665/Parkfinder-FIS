@@ -6,6 +6,14 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+/**
+ * Entidad JPA que representa una reserva de cupo de parqueadero.
+ * Registra fecha de inicio, fin, tiempo estimado, estado y si se
+ * aplico un beneficio de fidelizacion.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Entity
 @Table(name = "RESERVAS")
 @Getter

@@ -6,6 +6,14 @@ import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * Objeto de transferencia de datos para la creacion de reservas.
+ * Transporta IDs de usuario, vehiculo y cupo, junto con fecha
+ * de inicio y tiempo estimado.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Getter
 @Setter
 @AllArgsConstructor

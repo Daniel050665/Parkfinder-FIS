@@ -7,6 +7,14 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
+/**
+ * Entidad JPA que representa a un usuario del sistema ParkFinder.
+ * Almacena credenciales de acceso, fecha de registro y contador de usos
+ * acumulados para el sistema de fidelizacion.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Entity
 @Table(name = "USUARIOS")
 @Getter

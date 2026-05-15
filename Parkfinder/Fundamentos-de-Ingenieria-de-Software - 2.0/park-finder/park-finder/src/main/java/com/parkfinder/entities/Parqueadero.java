@@ -5,6 +5,14 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
+/**
+ * Entidad JPA que representa un establecimiento de parqueadero.
+ * Contiene informacion de ubicacion, tarifas, horarios y capacidad
+ * de cupos disponibles.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Entity
 @Table(name = "PARQUEADEROS")
 @Getter
@@ -35,5 +43,9 @@ public class Parqueadero {
     private String horarioCierre;
 
     private String estado;
+
+    private Double latitud;
+
+    private Double longitud;
 
 }

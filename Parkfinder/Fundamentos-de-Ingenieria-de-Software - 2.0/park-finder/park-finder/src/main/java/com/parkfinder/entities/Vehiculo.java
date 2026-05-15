@@ -5,6 +5,14 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
+/**
+ * Entidad JPA que representa un vehiculo registrado en el sistema.
+ * Se identifica por su placa y esta vinculado a un usuario propietario
+ * y a un tipo de vehiculo.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Entity
 @Table(name = "VEHICULOS")
 @Getter

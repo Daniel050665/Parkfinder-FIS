@@ -7,6 +7,14 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Entidad JPA que representa una transaccion de pago simulada.
+ * Registra el monto, metodo de pago, tipo, estado y su relacion
+ * con la reserva y el usuario correspondientes.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Entity
 @Table(name = "PAGOS")
 @Getter
