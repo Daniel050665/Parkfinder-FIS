@@ -1,4 +1,15 @@
-package com.parkfinder.ControllesJFX;
+package com.parkfinder.controller;
+
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.parkfinder.entities.Cupo;
 import com.parkfinder.entities.Parqueadero;
@@ -8,25 +19,31 @@ import com.parkfinder.repositories.VehiculoRepository;
 import com.parkfinder.services.ReservaService;
 import com.parkfinder.util.SesionActual;
 import com.parkfinder.util.ViewLoader;
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import javafx.scene.control.SpinnerValueFactory;
-import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.List;
-import java.util.ResourceBundle;
 
+/**
+ * Controlador JavaFX para la pantalla de reserva de cupos.
+ * Permite seleccionar un cupo especifico, vehiculo, fecha,
+ * hora y duracion para crear una nueva reserva.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Component
 @Scope("prototype")
 public class ReservaController implements Initializable {
@@ -192,7 +209,7 @@ public class ReservaController implements Initializable {
     @FXML
     private void handleConfirmarReserva(ActionEvent e) {
         if (cupoSeleccionado == null) { mostrarError("Selecciona un cupo."); return; }
-        if (vehiculoCombo.getValue() == null) { mostrarError("Selecciona un vehículo."); return; }
+        if (vehiculoCombo.getValue() == null) { mostrarError("Selecciona un vehiculo."); return; }
         if (fechaInicio.getValue() == null || horaInicio.getValue() == null) {
             mostrarError("Selecciona fecha y hora de inicio.");
             return;
@@ -206,6 +223,11 @@ public class ReservaController implements Initializable {
             );
 
             var usuario = SesionActual.getUsuario();
+            System.out.println("[Reserva] Creando reserva: Usuario=" + usuario.getIdUsuario()
+                + " Vehiculo=" + vehiculoCombo.getValue().getIdVehiculo()
+                + " Cupo=" + cupoSeleccionado.getIdCupo()
+                + " Inicio=" + inicio + " Horas=" + duracionSpinner.getValue());
+
             var reserva = reservaService.crearReserva(
                     usuario.getIdUsuario(),
                     vehiculoCombo.getValue().getIdVehiculo(),
@@ -214,10 +236,13 @@ public class ReservaController implements Initializable {
                     duracionSpinner.getValue()
             );
 
+            System.out.println("[Reserva] Reserva creada exitosamente, navegando a Pago");
             SesionActual.setReserva(reserva);
             Stage stage = (Stage) cuposPane.getScene().getWindow();
             ViewLoader.navegar(stage, "Pago.fxml");
         } catch (Exception ex) {
+            System.out.println("[Reserva] ERROR: " + ex.getMessage());
+            ex.printStackTrace();
             mostrarError("Error al crear la reserva: " + ex.getMessage());
         }
     }
