@@ -32,6 +32,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador JavaFX para la pantalla de gestion de reservas del usuario.
+ * Permite ver la reserva activa, historial, gestionar suscripciones,
+ * cancelar o modificar reservas y agregar vehiculos.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Component
 @Scope("prototype")
 public class MisReservasController implements Initializable {
@@ -151,6 +159,38 @@ public class MisReservasController implements Initializable {
                 .filter(r -> !r.getEstado().equals("ACTIVA"))
                 .toList();
         tablaHistorial.setItems(FXCollections.observableArrayList(historial));
+    }
+
+    // ─── Finalizar reserva ──────────────────────────────────────────────────
+
+    @FXML
+    private void handleFinalizarReserva(ActionEvent e) {
+        if (reservaActiva == null) {
+            mostrarInfo("No tienes ninguna reserva activa para finalizar.");
+            return;
+        }
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Finalizar reserva");
+        confirm.setHeaderText("Confirmar finalizacion del uso del parqueadero");
+        confirm.setContentText(
+                reservaActiva.getCupo().getParqueadero().getNombre()
+                        + " - Cupo #" + reservaActiva.getCupo().getNumeroCupo()
+                        + "\nEl cupo sera liberado y se sumara a tus usos acumulados."
+        );
+
+        confirm.showAndWait().ifPresent(btn -> {
+            if (btn == ButtonType.OK) {
+                try {
+                    reservaService.finalizarReserva(reservaActiva.getIdReserva());
+                    System.out.println("[MisReservas] Reserva finalizada ID=" + reservaActiva.getIdReserva());
+                    mostrarInfo("Reserva finalizada. El cupo ha sido liberado.");
+                    recargar();
+                } catch (Exception ex) {
+                    mostrarError("Error al finalizar: " + ex.getMessage());
+                }
+            }
+        });
     }
 
     // ─── Cancelar reserva ─────────────────────────────────────────────────────

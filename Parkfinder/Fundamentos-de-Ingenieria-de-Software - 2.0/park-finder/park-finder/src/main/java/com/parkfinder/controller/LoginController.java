@@ -15,6 +15,14 @@ import org.springframework.stereotype.Component;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador JavaFX para la pantalla de inicio de sesion.
+ * Gestiona la autenticacion de usuarios y la navegacion
+ * hacia el registro o el dashboard principal.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Component
 @Scope("prototype")
 public class LoginController implements Initializable {
