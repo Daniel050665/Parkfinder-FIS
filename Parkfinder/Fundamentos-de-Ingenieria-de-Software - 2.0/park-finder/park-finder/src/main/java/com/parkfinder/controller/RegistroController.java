@@ -1,27 +1,45 @@
 package com.parkfinder.controller;
 
-import com.parkfinder.entities.TipoVehiculo;
-import com.parkfinder.repositories.TipoVehiculoRepository;
-import com.parkfinder.services.UsuarioService;
-import com.parkfinder.util.SesionActual;
-import com.parkfinder.util.ViewLoader;
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.parkfinder.entities.TipoVehiculo;
+import com.parkfinder.repositories.TipoVehiculoRepository;
+import com.parkfinder.services.UsuarioService;
+import com.parkfinder.util.SesionActual;
+import com.parkfinder.util.ViewLoader;
+
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+
+/**
+ * Controlador JavaFX para la pantalla de registro de nuevos usuarios.
+ * Gestiona la captura de datos personales y del vehiculo,
+ * validaciones y la creacion de la cuenta.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Component
 @Scope("prototype")
 public class RegistroController implements Initializable {

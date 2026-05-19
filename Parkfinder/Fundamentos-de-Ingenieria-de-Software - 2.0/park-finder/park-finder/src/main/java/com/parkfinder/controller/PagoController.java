@@ -1,22 +1,35 @@
 package com.parkfinder.controller;
 
-import com.parkfinder.entities.Reserva;
-import com.parkfinder.services.PagoService;
-import com.parkfinder.util.SesionActual;
-import com.parkfinder.util.ViewLoader;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.parkfinder.entities.Reserva;
+import com.parkfinder.services.PagoService;
+import com.parkfinder.util.SesionActual;
+import com.parkfinder.util.ViewLoader;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
+
+/**
+ * Controlador JavaFX para la pantalla de pago.
+ * Muestra el resumen de la reserva, opciones de metodo de pago
+ * y gestiona la confirmacion del pago simulado.
+ *
+ * @author Equipo ParkFinder
+ * @version 1.0
+ */
 @Component
 @Scope("prototype")
 public class PagoController implements Initializable {
